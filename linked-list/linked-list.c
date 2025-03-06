@@ -62,7 +62,7 @@ void pushBack(List *list, int value)
     lastNode->next = newNode;
 }
 
-void remove(List *list, int value)
+void removeValue(List *list, int value)
 {
 
     if (list->head == NULL)
@@ -96,7 +96,7 @@ void remove(List *list, int value)
     free(current);
 }
 
-void free(List *list)
+void freeList(List *list)
 {
     Node *current = list->head;
     Node *next = NULL;
@@ -111,20 +111,77 @@ void free(List *list)
     list->head = NULL;
 }
 
-void print(List *list) {
+void print(List *list)
+{
 
     Node *current = list->head;
     size_t i = 1;
 
     printf("LinkedList Items\n");
 
-    while(current != NULL) {
+    while (current != NULL)
+    {
         printf("Item %zu: %d\n", i, current->data);
         current = current->next;
+        i++;
     }
-
 }
 
 int main()
 {
+    List *list;
+
+    initList(list);
+
+    printf("LinkedList Test Program\n\n");
+
+    size_t opt = 0;
+
+    while (opt != 6)
+    {
+
+        printf("Menu\n");
+        printf("1 - Print list\n");
+        printf("2 - Push item to front\n");
+        printf("3 - Push item to back\n");
+        printf("4 - Remove item\n");
+        printf("5 - Free list\n");
+        printf("6 - Exit\n");
+
+        scanf("%zu", &opt);
+        getchar();
+
+        int value;
+
+        switch (opt)
+        {
+        case 1:
+            print(list);
+            break;
+        case 2:
+            printf("Value to be pushed: ");
+            scanf("%d", &value);
+            getchar();
+            pushFront(list, value);
+            break;
+        case 3:
+            printf("Value to be pushed: ");
+            scanf("%d", &value);
+            getchar();
+            pushBack(list, value);
+            break;
+        case 4:
+            printf("Value to be removed: ");
+            scanf("%d", &value);
+            getchar();
+            removeValue(list, value);
+            break;
+        case 5:
+            freeList(list);
+            break;
+        default:
+            printf("Input not valid\n");
+            break;
+        }
+    }
 }
