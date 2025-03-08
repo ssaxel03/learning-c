@@ -129,7 +129,13 @@ void print(List *list)
 
 int main()
 {
-    List *list;
+    List *list = malloc(sizeof(List));
+
+    if (list == NULL)
+    {
+        printf("Memory allocation failed!\n");
+        return 1;
+    }
 
     initList(list);
 
@@ -178,6 +184,10 @@ int main()
             break;
         case 5:
             freeList(list);
+            break;
+        case 6:
+            freeList(list);
+            free(list);
             break;
         default:
             printf("Input not valid\n");
